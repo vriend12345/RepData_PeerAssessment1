@@ -31,37 +31,395 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <p>&lt;!DOCTYPE html&gt;</p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+
+<p>
+</p>
+<p></p>Reproducible Research: Peer Assessment 1
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {   
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+<p></p>
+
+<p></p>
+
+<h1>
+<a name="reproducible-research-peer-assessment-1" class="anchor" href="#reproducible-research-peer-assessment-1"><span class="octicon octicon-link"></span></a>Reproducible Research: Peer Assessment 1</h1>
+
+<h2>
+<a name="loading-and-preprocessing-the-data" class="anchor" href="#loading-and-preprocessing-the-data"><span class="octicon octicon-link"></span></a>Loading and preprocessing the data</h2>
+
+<p>After setting the working directory, we execute the following code to load the dataset <strong>activities</strong> </p>
+
+<pre><code>activities &lt;- read.csv(unz("activity.zip", "activity.csv"))
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Let's take a look at <strong>activities</strong> dataset.</p>
+
+<pre><code>str(activities)
+</code></pre>
+
+<pre><code>## 'data.frame':    17568 obs. of  3 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+</code></pre>
+
+<p>We notice that the type of <strong>date</strong> variable in the <strong>activities</strong> dataset is Factor.<br>
+We change it to be Date type using the following code.</p>
+
+<pre><code>activities &lt;- transform(activities, date = as.Date(date, "%Y-%m-%d"))
+</code></pre>
+
+<h2>
+<a name="what-is-mean-total-number-of-steps-taken-per-day" class="anchor" href="#what-is-mean-total-number-of-steps-taken-per-day"><span class="octicon octicon-link"></span></a>What is mean total number of steps taken per day?</h2>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="making-a-histogram-of-the-total-number-of-steps-taken-each-day" class="anchor" href="#making-a-histogram-of-the-total-number-of-steps-taken-each-day"><span class="octicon octicon-link"></span></a>Making a histogram of the total number of steps taken each day</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>In order to do that we first calculate the steps per day applying this code.</p>
+
+<pre><code>StepsPerDay &lt;- aggregate(activities["steps"], by = activities["date"], FUN = sum, 
+    na.rm = TRUE)
+</code></pre>
+
+<p>Then we plot a histogram that shows the total steps taken on a daily basis</p>
+
+<pre><code>plot(StepsPerDay$date, StepsPerDay$steps, type = "h", lwd = 3, col = "green", 
+    xlab = "Date", ylab = "Total steps", main = "Total steps taken each day")
+</code></pre>
+
+<p><img alt="plot of chunk histogram"></p>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="calculating-and-reporting-the-mean-and-median-total-number-of-steps-taken-per-day" class="anchor" href="#calculating-and-reporting-the-mean-and-median-total-number-of-steps-taken-per-day"><span class="octicon octicon-link"></span></a>Calculating and reporting the mean and median total number of steps taken per day</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<pre><code>Mean &lt;- mean(StepsPerDay$steps, na.rm = TRUE)
+sprintf("Mean = %.2f", Mean)
+</code></pre>
+
+<pre><code>## [1] "Mean = 9354.23"
+</code></pre>
+
+<pre><code>Median &lt;- median(StepsPerDay$steps, na.rm = TRUE)
+sprintf("Median = %.2f", Median)
+</code></pre>
+
+<pre><code>## [1] "Median = 10395.00"
+</code></pre>
+
+<h2>
+<a name="what-is-the-average-daily-activity-pattern" class="anchor" href="#what-is-the-average-daily-activity-pattern"><span class="octicon octicon-link"></span></a>What is the average daily activity pattern?</h2>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="making-a-time-series-plot-of-the-5-minute-interval-x-axis-and-the-average-number-of-steps-taken-averaged-across-all-days-y-axis" class="anchor" href="#making-a-time-series-plot-of-the-5-minute-interval-x-axis-and-the-average-number-of-steps-taken-averaged-across-all-days-y-axis"><span class="octicon octicon-link"></span></a>Making a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>In order to do that we first calculate the average number of steps per interval applying this code.</p>
+
+<pre><code>StepsPerInterval &lt;- aggregate(activities["steps"], by = activities["interval"], 
+    FUN = mean, na.rm = TRUE)
+</code></pre>
+
+<p>Then we plot a time series plot that shows the average number of steps taken on 5-minute interval averaged across all days.</p>
+
+<pre><code>plot(StepsPerInterval$interval, StepsPerInterval$steps, type = "l", lwd = 2, 
+    col = "blue", xlab = "5-minute interval", ylab = "Average number of steps", 
+    main = "Average steps taken each 5 minutes across all days")
+</code></pre>
+
+<p><img alt="plot of chunk time_series"></p>
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="finding-which-5-minute-interval-on-average-across-all-the-days-in-the-dataset-contains-the-maximum-number-of-steps" class="anchor" href="#finding-which-5-minute-interval-on-average-across-all-the-days-in-the-dataset-contains-the-maximum-number-of-steps"><span class="octicon octicon-link"></span></a>Finding Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps.</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<pre><code>maximum &lt;- StepsPerInterval[which.max(StepsPerInterval$steps), "interval"]
+</code></pre>
+
+<p>The 5-minute interval contains the maximum number of steps is = 835</p>
+
+<h2>
+<a name="imputing-missing-values" class="anchor" href="#imputing-missing-values"><span class="octicon octicon-link"></span></a>Imputing missing values</h2>
+
+<h3>
+<a name="calculating-and-reporting-the-total-number-of-missing-values-in-the-dataset" class="anchor" href="#calculating-and-reporting-the-total-number-of-missing-values-in-the-dataset"><span class="octicon octicon-link"></span></a>Calculating and reporting the total number of missing values in the dataset</h3>
+
+<pre><code>TotalNAs &lt;- sum(is.na(activities$steps))
+</code></pre>
+
+<p>Total number of missing values in the dataset is = 2304</p>
+
+<h3>
+<a name="devising-a-strategy-for-filling-in-all-of-the-missing-values-in-the-dataset" class="anchor" href="#devising-a-strategy-for-filling-in-all-of-the-missing-values-in-the-dataset"><span class="octicon octicon-link"></span></a>Devising a strategy for filling in all of the missing values in the dataset.</h3>
+
+<p>We used the following strategy.<br>
+Whenever there is a missing value we use the mean for that 5-minute interval 
+correspond to that value instead of the NA.  </p>
+
+<h3>
+<a name="creating-a-new-dataset-that-is-equal-to-the-original-dataset-but-with-the-missing-data-filled-in" class="anchor" href="#creating-a-new-dataset-that-is-equal-to-the-original-dataset-but-with-the-missing-data-filled-in"><span class="octicon octicon-link"></span></a>Creating a new dataset that is equal to the original dataset but with the missing data filled in.</h3>
+
+<p>We made a new dataset <strong>activities2</strong> to store the filled NA dataset, and apply the previous strategy.</p>
+
+<pre><code>activities2 &lt;- activities
+for (i in 1:nrow(activities2)) if (is.na(activities2$steps[i])) activities2$steps[i] &lt;- subset(StepsPerInterval, 
+    interval == activities2$interval[i])$steps
+</code></pre>
+
+<p>After executing the previous code we may check that <strong>activities2</strong> doesn't have any NA values.</p>
+
+<pre><code>sum(is.na(activities2$steps))
+</code></pre>
+
+<pre><code>## [1] 0
+</code></pre>
+
+<h3>
+<a name="making-a-histogram-of-the-total-number-of-steps-taken-each-day-1" class="anchor" href="#making-a-histogram-of-the-total-number-of-steps-taken-each-day-1"><span class="octicon octicon-link"></span></a>Making a histogram of the total number of steps taken each day</h3>
+
+<pre><code>StepsPerDay2 &lt;- aggregate(activities2["steps"], by = activities2["date"], FUN = sum, 
+    na.rm = TRUE)
+plot(StepsPerDay2$date, StepsPerDay2$steps, type = "h", lwd = 3, col = "green", 
+    xlab = "Date", ylab = "Total steps", main = "Total steps taken each day After Imputing missing values")
+</code></pre>
+
+<p><img alt="plot of chunk histogram_after_fill_na"></p>
+
+<h3>
+<a name="calculating-and-report-the-mean-and-median-total-number-of-steps-taken-per-day" class="anchor" href="#calculating-and-report-the-mean-and-median-total-number-of-steps-taken-per-day"><span class="octicon octicon-link"></span></a>Calculating and report the mean and median total number of steps taken per day.</h3>
+
+<pre><code>Mean2 &lt;- mean(StepsPerDay2$steps, na.rm = TRUE)
+sprintf("Mean = %.2f", Mean2)
+</code></pre>
+
+<pre><code>## [1] "Mean = 10766.19"
+</code></pre>
+
+<pre><code>Median2 &lt;- median(StepsPerDay2$steps, na.rm = TRUE)
+sprintf("Median = %.2f", Median2)
+</code></pre>
+
+<pre><code>## [1] "Median = 10766.19"
+</code></pre>
+
+<h3>
+<a name="do-these-values-differ-from-the-estimates-from-the-first-part-of-the-assignment" class="anchor" href="#do-these-values-differ-from-the-estimates-from-the-first-part-of-the-assignment"><span class="octicon octicon-link"></span></a>Do these values differ from the estimates from the first part of the assignment?</h3>
+
+<p>Yes in fact, the mean and median values differ from the estimates from the first part of the assignment.  </p>
+
+<h3>
+<a name="what-is-the-impact-of-imputing-missing-data-on-the-estimates-of-the-total-daily-number-of-steps" class="anchor" href="#what-is-the-impact-of-imputing-missing-data-on-the-estimates-of-the-total-daily-number-of-steps"><span class="octicon octicon-link"></span></a>What is the impact of imputing missing data on the estimates of the total daily number of steps?</h3>
+
+<p>After Imputing missing values stage, we notice that both the mean and the median number did increase.<br>
+The mean increased from 9354.2295 to 10766.<br>
+The median increased from 10395 to 10766.  </p>
+
+<h2>
+<a name="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="anchor" href="#are-there-differences-in-activity-patterns-between-weekdays-and-weekends"><span class="octicon octicon-link"></span></a>Are there differences in activity patterns between weekdays and weekends?</h2>
+
+<h3>
+<a name="creating-a-new-factor-variable-in-the-dataset-with-two-levels--weekday-and-weekend-indicating-whether-a-given-date-is-a-weekday-or-weekend-day" class="anchor" href="#creating-a-new-factor-variable-in-the-dataset-with-two-levels--weekday-and-weekend-indicating-whether-a-given-date-is-a-weekday-or-weekend-day"><span class="octicon octicon-link"></span></a>Creating a new factor variable in the dataset with two levels- “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</h3>
+
+<p>First, we define a function <strong>f</strong> that determine whether a given date is a weekday or a weekend day.</p>
+
+<pre><code>f &lt;- function(d) {
+    if (weekdays(d) == "Saturday" || weekdays(d) == "Sunday") 
+        "weekend" else "weekday"
+}
+</code></pre>
+
+<p>Then we apply this function <strong>f</strong> to create a factor variable in the dataset.</p>
+
+<pre><code>activities3 &lt;- activities2
+activities3$day &lt;- as.factor(sapply(activities3$date, f))
+</code></pre>
+
+<p>Let us see a table to compare the number of weekdays and weekend days.</p>
+
+<pre><code>table(activities3$day)
+</code></pre>
+
+<pre><code>## 
+## weekday weekend 
+##   12960    4608
+</code></pre>
+
+<h3>
+<a name="making-a-panel-plot-containing-a-time-series-plot-of-the-5-minute-interval-x-axis-and-the-average-number-of-steps-taken-averaged-across-all-weekday-days-or-weekend-days-y-axis" class="anchor" href="#making-a-panel-plot-containing-a-time-series-plot-of-the-5-minute-interval-x-axis-and-the-average-number-of-steps-taken-averaged-across-all-weekday-days-or-weekend-days-y-axis"><span class="octicon octicon-link"></span></a>Making a panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).</h3>
+
+<pre><code>par(mfrow = c(2, 1))
+
+with(subset(activities3, day == "weekend"), {
+    StepsPerInterval &lt;- aggregate(steps ~ interval, FUN = mean)
+    plot(StepsPerInterval$interval, StepsPerInterval$steps, type = "l", lwd = 2, 
+        col = "blue", xlab = "Interval", ylab = "Average number of steps", main = "Weekend plot")
+})
+
+
+with(subset(activities3, day == "weekday"), {
+    StepsPerInterval &lt;- aggregate(steps ~ interval, FUN = mean)
+    plot(StepsPerInterval$interval, StepsPerInterval$steps, type = "l", lwd = 2, 
+        col = "blue", xlab = "Interval", ylab = "Average number of steps", main = "Weekday plot")
+})
+</code></pre>
+
+<p><img alt="plot of chunk plot_weekdays_weekends"></p>
+
+<p></p>
+
+<p></p>
       </section>
     </div>
 
