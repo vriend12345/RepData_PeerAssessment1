@@ -31,172 +31,7 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p>&lt;!DOCTYPE html&gt;</p>
-
-
-
-<p>
-</p>
-<p></p>Reproducible Research: Peer Assessment 1
-body, td {
-   font-family: sans-serif;
-   background-color: white;
-   font-size: 12px;
-   margin: 8px;
-}
-
-tt, code, pre {
-   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
-}
-
-h1 { 
-   font-size:2.2em; 
-}
-
-h2 { 
-   font-size:1.8em; 
-}
-
-h3 { 
-   font-size:1.4em; 
-}
-
-h4 { 
-   font-size:1.0em; 
-}
-
-h5 { 
-   font-size:0.9em; 
-}
-
-h6 { 
-   font-size:0.8em; 
-}
-
-a:visited {
-   color: rgb(50%, 0%, 50%);
-}
-
-pre {   
-   margin-top: 0;
-   max-width: 95%;
-   border: 1px solid #ccc;
-   white-space: pre-wrap;
-}
-
-pre code {
-   display: block; padding: 0.5em;
-}
-
-code.r, code.cpp {
-   background-color: #F8F8F8;
-}
-
-table, td, th {
-  border: none;
-}
-
-blockquote {
-   color:#666666;
-   margin:0;
-   padding-left: 1em;
-   border-left: 0.5em #EEE solid;
-}
-
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
-}
-
-@media print {
-   * { 
-      background: transparent !important; 
-      color: black !important; 
-      filter:none !important; 
-      -ms-filter: none !important; 
-   }
-
-   body { 
-      font-size:12pt; 
-      max-width:100%; 
-   }
-       
-   a, a:visited { 
-      text-decoration: underline; 
-   }
-
-   hr { 
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote { 
-      padding-right: 1em; 
-      page-break-inside: avoid; 
-   }
-
-   tr, img { 
-      page-break-inside: avoid; 
-   }
-
-   img { 
-      max-width: 100% !important; 
-   }
-
-   @page :left { 
-      margin: 15mm 20mm 15mm 10mm; 
-   }
-     
-   @page :right { 
-      margin: 15mm 10mm 15mm 20mm; 
-   }
-
-   p, h2, h3 { 
-      orphans: 3; widows: 3; 
-   }
-
-   h2, h3 { 
-      page-break-after: avoid; 
-   }
-}
-
-
-   pre .operator,
-   pre .paren {
-     color: rgb(104, 118, 135)
-   }
-
-   pre .literal {
-     color: rgb(88, 72, 246)
-   }
-
-   pre .number {
-     color: rgb(0, 0, 205);
-   }
-
-   pre .comment {
-     color: rgb(76, 136, 107);
-   }
-
-   pre .keyword {
-     color: rgb(0, 0, 255);
-   }
-
-   pre .identifier {
-     color: rgb(0, 0, 0);
-   }
-
-   pre .string {
-     color: rgb(3, 106, 7);
-   }
-<p></p>
-
-<p></p>
-
-<h1>
+        <h1>
 <a name="reproducible-research-peer-assessment-1" class="anchor" href="#reproducible-research-peer-assessment-1"><span class="octicon octicon-link"></span></a>Reproducible Research: Peer Assessment 1</h1>
 
 <h2>
@@ -204,25 +39,19 @@ hr {
 
 <p>After setting the working directory, we execute the following code to load the dataset <strong>activities</strong> </p>
 
-<pre><code>activities &lt;- read.csv(unz("activity.zip", "activity.csv"))
-</code></pre>
+<div class="highlight highlight-r"><pre>activities <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="kp">unz</span><span class="p">(</span><span class="s">"activity.zip"</span><span class="p">,</span> <span class="s">"activity.csv"</span><span class="p">))</span>
+</pre></div>
 
 <p>Let's take a look at <strong>activities</strong> dataset.</p>
 
-<pre><code>str(activities)
-</code></pre>
-
-<pre><code>## 'data.frame':    17568 obs. of  3 variables:
-##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
-##  $ date    : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
-</code></pre>
+<div class="highlight highlight-r"><pre>str<span class="p">(</span>activities<span class="p">)</span>
+</pre></div>
 
 <p>We notice that the type of <strong>date</strong> variable in the <strong>activities</strong> dataset is Factor.<br>
 We change it to be Date type using the following code.</p>
 
-<pre><code>activities &lt;- transform(activities, date = as.Date(date, "%Y-%m-%d"))
-</code></pre>
+<div class="highlight highlight-r"><pre>activities <span class="o">&lt;-</span> <span class="kp">transform</span><span class="p">(</span>activities<span class="p">,</span> date <span class="o">=</span> <span class="kp">as.Date</span><span class="p">(</span><span class="kp">date</span><span class="p">,</span><span class="s">"%Y-%m-%d"</span><span class="p">))</span>
+</pre></div>
 
 <h2>
 <a name="what-is-mean-total-number-of-steps-taken-per-day" class="anchor" href="#what-is-mean-total-number-of-steps-taken-per-day"><span class="octicon octicon-link"></span></a>What is mean total number of steps taken per day?</h2>
@@ -232,34 +61,23 @@ We change it to be Date type using the following code.</p>
 
 <p>In order to do that we first calculate the steps per day applying this code.</p>
 
-<pre><code>StepsPerDay &lt;- aggregate(activities["steps"], by = activities["date"], FUN = sum, 
-    na.rm = TRUE)
-</code></pre>
+<div class="highlight highlight-r"><pre>StepsPerDay <span class="o">&lt;-</span> aggregate<span class="p">(</span>activities<span class="p">[</span><span class="s">"steps"</span><span class="p">],</span> by<span class="o">=</span>activities<span class="p">[</span><span class="s">"date"</span><span class="p">],</span> FUN<span class="o">=</span><span class="kp">sum</span><span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
 
 <p>Then we plot a histogram that shows the total steps taken on a daily basis</p>
 
-<pre><code>plot(StepsPerDay$date, StepsPerDay$steps, type = "h", lwd = 3, col = "green", 
-    xlab = "Date", ylab = "Total steps", main = "Total steps taken each day")
-</code></pre>
-
-<p><img alt="plot of chunk histogram"></p>
+<div class="highlight highlight-r"><pre>plot<span class="p">(</span>StepsPerDay<span class="o">$</span><span class="kp">date</span><span class="p">,</span> StepsPerDay<span class="o">$</span>steps<span class="p">,</span> type<span class="o">=</span><span class="s">"h"</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">3</span><span class="p">,</span> col<span class="o">=</span><span class="s">"green"</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">"Date"</span><span class="p">,</span> 
+     ylab<span class="o">=</span><span class="s">"Total steps"</span><span class="p">,</span> main<span class="o">=</span><span class="s">"Total steps taken each day"</span><span class="p">)</span>
+</pre></div>
 
 <h3>
 <a name="calculating-and-reporting-the-mean-and-median-total-number-of-steps-taken-per-day" class="anchor" href="#calculating-and-reporting-the-mean-and-median-total-number-of-steps-taken-per-day"><span class="octicon octicon-link"></span></a>Calculating and reporting the mean and median total number of steps taken per day</h3>
 
-<pre><code>Mean &lt;- mean(StepsPerDay$steps, na.rm = TRUE)
-sprintf("Mean = %.2f", Mean)
-</code></pre>
-
-<pre><code>## [1] "Mean = 9354.23"
-</code></pre>
-
-<pre><code>Median &lt;- median(StepsPerDay$steps, na.rm = TRUE)
-sprintf("Median = %.2f", Median)
-</code></pre>
-
-<pre><code>## [1] "Median = 10395.00"
-</code></pre>
+<div class="highlight highlight-r"><pre>Mean <span class="o">&lt;-</span> <span class="kp">mean</span><span class="p">(</span>StepsPerDay<span class="o">$</span>steps<span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="kp">sprintf</span><span class="p">(</span><span class="s">"Mean = %.2f"</span><span class="p">,</span> Mean<span class="p">)</span>
+Median <span class="o">&lt;-</span> median<span class="p">(</span>StepsPerDay<span class="o">$</span>steps<span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="kp">sprintf</span><span class="p">(</span><span class="s">"Median = %.2f"</span><span class="p">,</span> Median<span class="p">)</span>
+</pre></div>
 
 <h2>
 <a name="what-is-the-average-daily-activity-pattern" class="anchor" href="#what-is-the-average-daily-activity-pattern"><span class="octicon octicon-link"></span></a>What is the average daily activity pattern?</h2>
@@ -269,26 +87,23 @@ sprintf("Median = %.2f", Median)
 
 <p>In order to do that we first calculate the average number of steps per interval applying this code.</p>
 
-<pre><code>StepsPerInterval &lt;- aggregate(activities["steps"], by = activities["interval"], 
-    FUN = mean, na.rm = TRUE)
-</code></pre>
+<div class="highlight highlight-r"><pre>StepsPerInterval <span class="o">&lt;-</span> aggregate<span class="p">(</span>activities<span class="p">[</span><span class="s">"steps"</span><span class="p">],</span> by<span class="o">=</span>activities<span class="p">[</span><span class="s">"interval"</span><span class="p">],</span> FUN<span class="o">=</span><span class="kp">mean</span><span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
 
 <p>Then we plot a time series plot that shows the average number of steps taken on 5-minute interval averaged across all days.</p>
 
-<pre><code>plot(StepsPerInterval$interval, StepsPerInterval$steps, type = "l", lwd = 2, 
-    col = "blue", xlab = "5-minute interval", ylab = "Average number of steps", 
-    main = "Average steps taken each 5 minutes across all days")
-</code></pre>
-
-<p><img alt="plot of chunk time_series"></p>
+<div class="highlight highlight-r"><pre>plot<span class="p">(</span>StepsPerInterval<span class="o">$</span>interval<span class="p">,</span> StepsPerInterval<span class="o">$</span>steps<span class="p">,</span> type<span class="o">=</span><span class="s">"l"</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">2</span><span class="p">,</span> col<span class="o">=</span><span class="s">"blue"</span><span class="p">,</span>
+     xlab<span class="o">=</span><span class="s">"5-minute interval"</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">"Average number of steps"</span><span class="p">,</span> 
+     main<span class="o">=</span><span class="s">"Average steps taken each 5 minutes across all days"</span><span class="p">)</span>
+</pre></div>
 
 <h3>
 <a name="finding-which-5-minute-interval-on-average-across-all-the-days-in-the-dataset-contains-the-maximum-number-of-steps" class="anchor" href="#finding-which-5-minute-interval-on-average-across-all-the-days-in-the-dataset-contains-the-maximum-number-of-steps"><span class="octicon octicon-link"></span></a>Finding Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps.</h3>
 
-<pre><code>maximum &lt;- StepsPerInterval[which.max(StepsPerInterval$steps), "interval"]
-</code></pre>
+<div class="highlight highlight-r"><pre>maximum <span class="o">&lt;-</span> StepsPerInterval<span class="p">[</span><span class="kp">which.max</span><span class="p">(</span>StepsPerInterval<span class="o">$</span>steps<span class="p">),</span><span class="s">"interval"</span><span class="p">]</span>
+</pre></div>
 
-<p>The 5-minute interval contains the maximum number of steps is = 835</p>
+<p>The 5-minute interval contains the maximum number of steps is = <code>r maximum</code></p>
 
 <h2>
 <a name="imputing-missing-values" class="anchor" href="#imputing-missing-values"><span class="octicon octicon-link"></span></a>Imputing missing values</h2>
@@ -296,10 +111,10 @@ sprintf("Median = %.2f", Median)
 <h3>
 <a name="calculating-and-reporting-the-total-number-of-missing-values-in-the-dataset" class="anchor" href="#calculating-and-reporting-the-total-number-of-missing-values-in-the-dataset"><span class="octicon octicon-link"></span></a>Calculating and reporting the total number of missing values in the dataset</h3>
 
-<pre><code>TotalNAs &lt;- sum(is.na(activities$steps))
-</code></pre>
+<div class="highlight highlight-r"><pre>TotalNAs <span class="o">&lt;-</span> <span class="kp">sum</span><span class="p">(</span><span class="kp">is.na</span><span class="p">(</span>activities<span class="o">$</span>steps<span class="p">))</span>
+</pre></div>
 
-<p>Total number of missing values in the dataset is = 2304</p>
+<p>Total number of missing values in the dataset is = <code>r TotalNAs</code></p>
 
 <h3>
 <a name="devising-a-strategy-for-filling-in-all-of-the-missing-values-in-the-dataset" class="anchor" href="#devising-a-strategy-for-filling-in-all-of-the-missing-values-in-the-dataset"><span class="octicon octicon-link"></span></a>Devising a strategy for filling in all of the missing values in the dataset.</h3>
@@ -313,46 +128,33 @@ correspond to that value instead of the NA.  </p>
 
 <p>We made a new dataset <strong>activities2</strong> to store the filled NA dataset, and apply the previous strategy.</p>
 
-<pre><code>activities2 &lt;- activities
-for (i in 1:nrow(activities2)) if (is.na(activities2$steps[i])) activities2$steps[i] &lt;- subset(StepsPerInterval, 
-    interval == activities2$interval[i])$steps
-</code></pre>
+<div class="highlight highlight-r"><pre>activities2 <span class="o">&lt;-</span> activities
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>activities2<span class="p">))</span>
+        <span class="kr">if</span><span class="p">(</span><span class="kp">is.na</span><span class="p">(</span>activities2<span class="o">$</span>steps<span class="p">[</span>i<span class="p">]))</span>
+                activities2<span class="o">$</span>steps<span class="p">[</span>i<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>StepsPerInterval<span class="p">,</span> interval<span class="o">==</span>activities2<span class="o">$</span>interval<span class="p">[</span>i<span class="p">])</span><span class="o">$</span>steps
+</pre></div>
 
 <p>After executing the previous code we may check that <strong>activities2</strong> doesn't have any NA values.</p>
 
-<pre><code>sum(is.na(activities2$steps))
-</code></pre>
-
-<pre><code>## [1] 0
-</code></pre>
+<div class="highlight highlight-r"><pre><span class="kp">sum</span><span class="p">(</span><span class="kp">is.na</span><span class="p">(</span>activities2<span class="o">$</span>steps<span class="p">))</span>
+</pre></div>
 
 <h3>
 <a name="making-a-histogram-of-the-total-number-of-steps-taken-each-day-1" class="anchor" href="#making-a-histogram-of-the-total-number-of-steps-taken-each-day-1"><span class="octicon octicon-link"></span></a>Making a histogram of the total number of steps taken each day</h3>
 
-<pre><code>StepsPerDay2 &lt;- aggregate(activities2["steps"], by = activities2["date"], FUN = sum, 
-    na.rm = TRUE)
-plot(StepsPerDay2$date, StepsPerDay2$steps, type = "h", lwd = 3, col = "green", 
-    xlab = "Date", ylab = "Total steps", main = "Total steps taken each day After Imputing missing values")
-</code></pre>
-
-<p><img alt="plot of chunk histogram_after_fill_na"></p>
+<div class="highlight highlight-r"><pre>StepsPerDay2 <span class="o">&lt;-</span> aggregate<span class="p">(</span>activities2<span class="p">[</span><span class="s">"steps"</span><span class="p">],</span> by<span class="o">=</span>activities2<span class="p">[</span><span class="s">"date"</span><span class="p">],</span> FUN<span class="o">=</span><span class="kp">sum</span><span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+plot<span class="p">(</span>StepsPerDay2<span class="o">$</span><span class="kp">date</span><span class="p">,</span> StepsPerDay2<span class="o">$</span>steps<span class="p">,</span> type<span class="o">=</span><span class="s">"h"</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">3</span><span class="p">,</span> col<span class="o">=</span><span class="s">"green"</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">"Date"</span><span class="p">,</span> 
+     ylab<span class="o">=</span><span class="s">"Total steps"</span><span class="p">,</span> main<span class="o">=</span><span class="s">"Total steps taken each day After Imputing missing values"</span><span class="p">)</span>
+</pre></div>
 
 <h3>
 <a name="calculating-and-report-the-mean-and-median-total-number-of-steps-taken-per-day" class="anchor" href="#calculating-and-report-the-mean-and-median-total-number-of-steps-taken-per-day"><span class="octicon octicon-link"></span></a>Calculating and report the mean and median total number of steps taken per day.</h3>
 
-<pre><code>Mean2 &lt;- mean(StepsPerDay2$steps, na.rm = TRUE)
-sprintf("Mean = %.2f", Mean2)
-</code></pre>
-
-<pre><code>## [1] "Mean = 10766.19"
-</code></pre>
-
-<pre><code>Median2 &lt;- median(StepsPerDay2$steps, na.rm = TRUE)
-sprintf("Median = %.2f", Median2)
-</code></pre>
-
-<pre><code>## [1] "Median = 10766.19"
-</code></pre>
+<div class="highlight highlight-r"><pre>Mean2 <span class="o">&lt;-</span> <span class="kp">mean</span><span class="p">(</span>StepsPerDay2<span class="o">$</span>steps<span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="kp">sprintf</span><span class="p">(</span><span class="s">"Mean = %.2f"</span><span class="p">,</span> Mean2<span class="p">)</span>
+Median2 <span class="o">&lt;-</span> median<span class="p">(</span>StepsPerDay2<span class="o">$</span>steps<span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="kp">sprintf</span><span class="p">(</span><span class="s">"Median = %.2f"</span><span class="p">,</span> Median2<span class="p">)</span>
+</pre></div>
 
 <h3>
 <a name="do-these-values-differ-from-the-estimates-from-the-first-part-of-the-assignment" class="anchor" href="#do-these-values-differ-from-the-estimates-from-the-first-part-of-the-assignment"><span class="octicon octicon-link"></span></a>Do these values differ from the estimates from the first part of the assignment?</h3>
@@ -363,63 +165,54 @@ sprintf("Median = %.2f", Median2)
 <a name="what-is-the-impact-of-imputing-missing-data-on-the-estimates-of-the-total-daily-number-of-steps" class="anchor" href="#what-is-the-impact-of-imputing-missing-data-on-the-estimates-of-the-total-daily-number-of-steps"><span class="octicon octicon-link"></span></a>What is the impact of imputing missing data on the estimates of the total daily number of steps?</h3>
 
 <p>After Imputing missing values stage, we notice that both the mean and the median number did increase.<br>
-The mean increased from 9354.2295 to 10766.<br>
-The median increased from 10395 to 10766.  </p>
+The mean increased from <code>r Mean</code> to <code>r format(Mean2, scientific = F)</code>.<br>
+The median increased from <code>r Median</code> to <code>r format(Median2, scientific = F)</code>.  </p>
 
 <h2>
 <a name="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="anchor" href="#are-there-differences-in-activity-patterns-between-weekdays-and-weekends"><span class="octicon octicon-link"></span></a>Are there differences in activity patterns between weekdays and weekends?</h2>
 
 <h3>
-<a name="creating-a-new-factor-variable-in-the-dataset-with-two-levels--weekday-and-weekend-indicating-whether-a-given-date-is-a-weekday-or-weekend-day" class="anchor" href="#creating-a-new-factor-variable-in-the-dataset-with-two-levels--weekday-and-weekend-indicating-whether-a-given-date-is-a-weekday-or-weekend-day"><span class="octicon octicon-link"></span></a>Creating a new factor variable in the dataset with two levels- “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</h3>
+<a name="creating-a-new-factor-variable-in-the-dataset-with-two-levels--weekday-and-weekend-indicating-whether-a-given-date-is-a-weekday-or-weekend-day" class="anchor" href="#creating-a-new-factor-variable-in-the-dataset-with-two-levels--weekday-and-weekend-indicating-whether-a-given-date-is-a-weekday-or-weekend-day"><span class="octicon octicon-link"></span></a>Creating a new factor variable in the dataset with two levels- "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.</h3>
 
 <p>First, we define a function <strong>f</strong> that determine whether a given date is a weekday or a weekend day.</p>
 
-<pre><code>f &lt;- function(d) {
-    if (weekdays(d) == "Saturday" || weekdays(d) == "Sunday") 
-        "weekend" else "weekday"
-}
-</code></pre>
+<div class="highlight highlight-r"><pre>f <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>d<span class="p">){</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="kp">weekdays</span><span class="p">(</span>d<span class="p">)</span><span class="o">==</span><span class="s">"Saturday"</span> <span class="o">||</span> <span class="kp">weekdays</span><span class="p">(</span>d<span class="p">)</span><span class="o">==</span><span class="s">"Sunday"</span><span class="p">)</span> <span class="s">"weekend"</span>
+        <span class="kr">else</span> <span class="s">"weekday"</span>
+<span class="p">}</span>
+</pre></div>
 
 <p>Then we apply this function <strong>f</strong> to create a factor variable in the dataset.</p>
 
-<pre><code>activities3 &lt;- activities2
-activities3$day &lt;- as.factor(sapply(activities3$date, f))
-</code></pre>
+<div class="highlight highlight-r"><pre>activities3 <span class="o">&lt;-</span> activities2
+activities3<span class="o">$</span>day <span class="o">&lt;-</span> <span class="kp">as.factor</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span>activities3<span class="o">$</span><span class="kp">date</span><span class="p">,</span> f<span class="p">))</span>
+</pre></div>
 
 <p>Let us see a table to compare the number of weekdays and weekend days.</p>
 
-<pre><code>table(activities3$day)
-</code></pre>
-
-<pre><code>## 
-## weekday weekend 
-##   12960    4608
-</code></pre>
+<div class="highlight highlight-r"><pre><span class="kp">table</span><span class="p">(</span>activities3<span class="o">$</span>day<span class="p">)</span>
+</pre></div>
 
 <h3>
 <a name="making-a-panel-plot-containing-a-time-series-plot-of-the-5-minute-interval-x-axis-and-the-average-number-of-steps-taken-averaged-across-all-weekday-days-or-weekend-days-y-axis" class="anchor" href="#making-a-panel-plot-containing-a-time-series-plot-of-the-5-minute-interval-x-axis-and-the-average-number-of-steps-taken-averaged-across-all-weekday-days-or-weekend-days-y-axis"><span class="octicon octicon-link"></span></a>Making a panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).</h3>
 
-<pre><code>par(mfrow = c(2, 1))
+<div class="highlight highlight-r"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
 
-with(subset(activities3, day == "weekend"), {
-    StepsPerInterval &lt;- aggregate(steps ~ interval, FUN = mean)
-    plot(StepsPerInterval$interval, StepsPerInterval$steps, type = "l", lwd = 2, 
-        col = "blue", xlab = "Interval", ylab = "Average number of steps", main = "Weekend plot")
-})
+<span class="kp">with</span><span class="p">(</span><span class="kp">subset</span><span class="p">(</span>activities3<span class="p">,</span> day<span class="o">==</span><span class="s">"weekend"</span><span class="p">),{</span>
+        StepsPerInterval <span class="o">&lt;-</span> aggregate<span class="p">(</span>steps <span class="o">~</span> interval<span class="p">,</span> FUN<span class="o">=</span><span class="kp">mean</span><span class="p">)</span>
+        plot<span class="p">(</span>StepsPerInterval<span class="o">$</span>interval<span class="p">,</span> StepsPerInterval<span class="o">$</span>steps<span class="p">,</span> type<span class="o">=</span><span class="s">"l"</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">2</span><span class="p">,</span> col<span class="o">=</span><span class="s">"blue"</span><span class="p">,</span>
+             xlab<span class="o">=</span><span class="s">"Interval"</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">"Average number of steps"</span><span class="p">,</span> 
+             main<span class="o">=</span><span class="s">"Weekend plot"</span><span class="p">)</span>
+<span class="p">})</span>
 
 
-with(subset(activities3, day == "weekday"), {
-    StepsPerInterval &lt;- aggregate(steps ~ interval, FUN = mean)
-    plot(StepsPerInterval$interval, StepsPerInterval$steps, type = "l", lwd = 2, 
-        col = "blue", xlab = "Interval", ylab = "Average number of steps", main = "Weekday plot")
-})
-</code></pre>
-
-<p><img alt="plot of chunk plot_weekdays_weekends"></p>
-
-<p></p>
-
-<p></p>
+<span class="kp">with</span><span class="p">(</span><span class="kp">subset</span><span class="p">(</span>activities3<span class="p">,</span> day<span class="o">==</span><span class="s">"weekday"</span><span class="p">),{</span>
+        StepsPerInterval <span class="o">&lt;-</span> aggregate<span class="p">(</span>steps <span class="o">~</span> interval<span class="p">,</span> FUN<span class="o">=</span><span class="kp">mean</span><span class="p">)</span>
+        plot<span class="p">(</span>StepsPerInterval<span class="o">$</span>interval<span class="p">,</span> StepsPerInterval<span class="o">$</span>steps<span class="p">,</span> type<span class="o">=</span><span class="s">"l"</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">2</span><span class="p">,</span> col<span class="o">=</span><span class="s">"blue"</span><span class="p">,</span>
+             xlab<span class="o">=</span><span class="s">"Interval"</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">"Average number of steps"</span><span class="p">,</span> 
+             main<span class="o">=</span><span class="s">"Weekday plot"</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
       </section>
     </div>
 
